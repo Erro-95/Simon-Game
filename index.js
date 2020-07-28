@@ -32,15 +32,11 @@ function sound (color) {
 
 // Function that will play a random button. The button will be stored inside the "sequence" array.
 function startGame () {
-	let num = Math.floor(Math.random() * btns.length);
-	let next = btns[num];
-	sequence.push(next);
-	document.querySelector('#level-title').innerHTML = `Level ${sequence.length}`;
-	automaticPlay(next);
+	nextInSequence();
 	btnsAnimation();
 }
 
-function nextInSequence2 () {
+function nextInSequence () {
 	let num = Math.floor(Math.random() * btns.length);
 	let next = btns[num];
 	storedSeq = [];
