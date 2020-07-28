@@ -64,7 +64,7 @@ function rightOrWrong () {
 		indx = 0;
 		automaticPlay(this);
 		setTimeout(() => {
-			nextInSequence2();
+			nextInSequence();
 		}, 1000);
 	} else {
 		endGame(this);
