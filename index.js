@@ -9,7 +9,7 @@ document.addEventListener('keydown', nextInSequence, { once: true });
 // assign each button an event handler that will attach the "pressed" style class upon a click.
 function btnsAnimation () {
 	for (let i = 0; i < btns.length; i++) {
-		btns[i].addEventListener('click', rightOrWrong, { once: true });
+		btns[i].addEventListener('click', rightOrWrong);
 	}
 }
 
