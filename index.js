@@ -4,12 +4,18 @@ var storedSeq = [];
 var indx = 0;
 
 // Will kick off the next sequence (technically the starting color and sound) and unbind the event handler once the game has started.
-document.addEventListener('keydown', startGame, { once: true });
+document.addEventListener('keydown', nextInSequence, { once: true });
 
 // assign each button an event handler that will attach the "pressed" style class upon a click.
 function btnsAnimation () {
 	for (let i = 0; i < btns.length; i++) {
-		btns[i].addEventListener('click', rightOrWrong);
+		btns[i].addEventListener('click', rightOrWrong, { once: true });
+	}
+}
+
+function removeEventHandlers () {
+	for (let i = 0; i < btns.length; i++) {
+		btns[i].removeEventListener('click', rightOrWrong);
 	}
 }
 
@@ -31,11 +37,6 @@ function sound (color) {
 }
 
 // Function that will play a random button. The button will be stored inside the "sequence" array.
-function startGame () {
-	nextInSequence();
-	btnsAnimation();
-}
-
 function nextInSequence () {
 	let num = Math.floor(Math.random() * btns.length);
 	let next = btns[num];
@@ -43,6 +44,7 @@ function nextInSequence () {
 	sequence.push(next);
 	document.querySelector('#level-title').innerHTML = `Level ${sequence.length}`;
 	automaticPlay(next);
+	btnsAnimation();
 }
 
 // Function that adds and removes the "pressed" effect automatically upon starting the game as well as play the corresponding button sound.
@@ -63,6 +65,7 @@ function rightOrWrong () {
 	} else if (this.id === sequence[indx].id && storedSeq.length === sequence.length) {
 		indx = 0;
 		automaticPlay(this);
+		removeEventHandlers();
 		setTimeout(() => {
 			nextInSequence();
 		}, 700);
@@ -85,5 +88,5 @@ function endGame (btn) {
 		document.body.classList.remove('game-over');
 		btn.classList.remove('pressed');
 	}, 100);
-	document.addEventListener('keydown', startGame, { once: true });
+	document.addEventListener('keydown', nextInSequence, { once: true });
 }
