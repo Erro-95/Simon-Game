@@ -72,6 +72,7 @@ function rightOrWrong () {
 }
 
 function endGame (btn) {
+	indx = 0;
 	sequence = [];
 	storedSeq = [];
 	document.body.classList.add('game-over');
